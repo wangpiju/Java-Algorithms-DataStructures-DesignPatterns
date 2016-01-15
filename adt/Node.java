@@ -1,4 +1,4 @@
-package test_adt;
+package adt;
 
 
 //implement tree interface

@@ -1,4 +1,4 @@
-package test_adt;
+package adt;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,4 +1,4 @@
-package test_adt;
+package adt;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
