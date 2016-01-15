@@ -2,7 +2,9 @@ package algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Fib {
 
@@ -12,10 +14,44 @@ public class Fib {
 //		for(Integer i: result)
 //			System.out.println(i);
 		
-		System.out.println(fibN(8));
+		//System.out.println(fibN(8));
+		
+		final long nonCachedStart = System.nanoTime();
+		fibN(45);
+		final long nonCachedEnd = System.nanoTime();
+		cachedFibN(45);
+		final long cachedFinish = System.nanoTime();
+		
+		System.out.println("no cached time: " +(nonCachedEnd -nonCachedStart));
+		
+		System.out.println("cached time: " +(cachedFinish -nonCachedEnd));
+		
+		
 
 	}
+	//改進遞迴法，將計算過的存在記憶體
+	private static Map<Integer, Integer> fibCache = new HashMap<Integer, Integer>();
 	
+	public static int cachedFibN(int n){
+		if(n < 0){
+			throw new IllegalArgumentException("n must not be less than zero");
+		}
+		
+		fibCache.put(0, 0);
+		fibCache.put(1, 1);
+		
+		return recursiveCachedFibN(n);
+	}
+	
+	private static int recursiveCachedFibN(int n){
+		if(fibCache.containsKey(n))
+			return fibCache.get(n);
+		
+		int value = recursiveCachedFibN(n -1) + recursiveCachedFibN(n -2);
+		fibCache.put(n, value);
+		return value;
+	}
+	//遞迴法
 	public static int fibN(int n){
 		if(n < 0)
 			throw new IllegalArgumentException("n must not be less than zero");
