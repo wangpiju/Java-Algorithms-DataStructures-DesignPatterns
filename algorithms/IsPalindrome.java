@@ -1,6 +1,6 @@
 package algorithms;
 
-import java.util.LinkedList;
+
 
 public class IsPalindrome {
 

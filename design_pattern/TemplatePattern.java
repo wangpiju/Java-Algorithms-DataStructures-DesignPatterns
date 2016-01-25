@@ -18,6 +18,7 @@ public class TemplatePattern {
 			}
 		}
 		
+		@SuppressWarnings("unused")
 		public void evenPredicate(){
 			final Stack filtered = stack.filter(new StackPredicate(){
 				@Override

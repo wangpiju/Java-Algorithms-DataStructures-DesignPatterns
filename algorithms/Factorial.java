@@ -1,7 +1,5 @@
 package algorithms;
 
-import java.math.BigInteger;
-
 
 //Use iterative to implement Factorial
 public class Factorial {

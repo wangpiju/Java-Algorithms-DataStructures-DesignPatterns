@@ -12,7 +12,7 @@ public class Anagram {
 	final static Map<String, List<String>> lookup = new HashMap<String, List<String>>();
 
 	public static void main(String[] args) {
-		List<String> wordList = new ArrayList();
+		List<String> wordList = new ArrayList<String>();
 		wordList.add("12345");
 		wordList.add("54321");
 		wordList.add("789");

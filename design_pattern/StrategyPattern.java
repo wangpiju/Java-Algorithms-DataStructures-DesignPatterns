@@ -58,6 +58,7 @@ public class StrategyPattern {
 		c.doWork(32);
 	}
 	
+	@SuppressWarnings("resource")
 	public static void useFileLogging() throws IOException{
 		final File tempFile = File.createTempFile("test", "log");
 		final Client c = new Client(new FileLogging(tempFile));
