@@ -1,6 +1,9 @@
 package design_pattern;
 
 public class BuilderPattern {
+	private String name;
+	private Integer number;
+	
 	public static class Builder{
 		private String name;
 		private Integer number;
@@ -25,9 +28,7 @@ public class BuilderPattern {
 		}
 	}
 	
-	private String name;
-	private Integer number;
-	
+	//let BuilderPattern's constructor can't directly be called
 	private BuilderPattern(String name, Integer number){
 		this.setName(name);
 		this.setNumber(number);
