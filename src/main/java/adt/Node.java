@@ -2,7 +2,7 @@ package adt;
 
 
 //implement tree interface
-public class Node<E extends Comparable> implements Tree<E> {
+public class Node< E extends Comparable<E>> implements Tree<E> {
 	private E value;
 	private SimpleTree<E> left;
 	private SimpleTree<E> right;

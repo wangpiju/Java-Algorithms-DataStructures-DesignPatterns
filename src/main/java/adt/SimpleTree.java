@@ -1,10 +1,6 @@
 package adt;
 
-
-
-import org.junit.Test;
-
-public class SimpleTree <E extends Comparable>{
+public class SimpleTree <E extends Comparable<E>>{
 	private E value;
 	private SimpleTree<E> left;
 	private SimpleTree<E> right;
@@ -25,7 +21,7 @@ public class SimpleTree <E extends Comparable>{
 		return right;
 	}
 	
-	@Test
+	
 	public static void createTree(){
 		final SimpleTree<Integer> root = new SimpleTree<Integer>(7, null, null);
 		root.insert(3);
