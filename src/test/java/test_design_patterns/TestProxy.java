@@ -1,15 +1,13 @@
 package test_design_patterns;
 
-import design_pattern.proxy.IUserDao;
-import design_pattern.proxy.ProxyFactory;
-import design_pattern.proxy.UserDao;
-import design_pattern.proxy.UserDaoProxy;
+import design_pattern.proxy.*;
 
 public class TestProxy {
 
     public static void main(String[] args) {
         //testStaticProxy();
-        testDynamicProxy();
+        //testDynamicProxy();
+        testCglibProxy();
     }
     //測試靜態代理
     public static void testStaticProxy(){
@@ -35,6 +33,18 @@ public class TestProxy {
         System.out.println(proxy.getClass());
 
         // 执行方法   【代理对象】
+        proxy.save();
+    }
+
+    //測試動態代理
+    public static void testCglibProxy(){
+        //目标对象
+        UserDao target = new UserDao();
+
+        //代理对象
+        UserDao proxy = (UserDao)new CglibProxy(target).getProxyInstance();
+
+        //执行代理对象的方法
         proxy.save();
     }
 }
