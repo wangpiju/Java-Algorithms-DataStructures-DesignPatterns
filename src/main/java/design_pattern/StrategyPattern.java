@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class StrategyPattern {
 	
-	public static interface Logging{
+	public  interface Logging{
 		void write(String message);
 	}
 	
@@ -23,7 +23,7 @@ public class StrategyPattern {
 	public static class FileLogging implements Logging{
 		private final File toWrite;
 		
-		public FileLogging(final File toWrite){
+		FileLogging(final File toWrite){
 			this.toWrite = toWrite;
 		}
 
@@ -42,24 +42,19 @@ public class StrategyPattern {
 	public static class Client{
 		private final Logging logging;
 		
-		public Client(Logging logging){
+		Client(Logging logging){
 			this.logging = logging;
 		}
 		
-		public void doWork(final int count){
+		void doWork(final int count){
 			if(count % 2 == 0){
 				logging.write("Even number: " + count);
 			}
 		}
 	}
 	
-	public static void useConsoleLogging(){
-		final Client c = new Client(new ConsoleLogging());
-		c.doWork(32);
-	}
-	
 	@SuppressWarnings("resource")
-	public static void useFileLogging() throws IOException{
+	private static void useFileLogging() throws IOException{
 		final File tempFile = File.createTempFile("test", "log");
 		final Client c = new Client(new FileLogging(tempFile));
 		c.doWork(41);
@@ -71,23 +66,12 @@ public class StrategyPattern {
 		System.out.println(reader.readLine());
 		System.out.println(reader.read());
 	}
+
 	
-	public static void useMockLogging(){
-		final Logging  mockLogging = mock(Logging.class);
-		
-		final Client c = new Client(mockLogging);
-		c.doWork(1);
-		c.doWork(2);
-	}
-	
-	private static Logging mock(Class<Logging> class1) {
-		
-		return null;
-	}
+
 
 	public static void main(String[] args) throws IOException {
 		useFileLogging();
-
 	}
 
 }

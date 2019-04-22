@@ -11,7 +11,7 @@ public class PerformOperation implements IntegerOperation{
 	}
 	
 	public static List<Integer> updateList(final List<Integer> numbers, final IntegerOperation op){
-		final ArrayList<Integer> toReturn = new ArrayList<Integer>(numbers.size());
+		final ArrayList<Integer> toReturn = new ArrayList<>(numbers.size());
 		
 		for(final Integer number: numbers){
 			toReturn.add(op.performOperation(number));
