@@ -1,8 +1,6 @@
-package test_design_patterns;
+package design_pattern.proxy;
 
-import design_pattern.proxy.*;
-
-public class TestProxy {
+public class Main {
 
     public static void main(String[] args) {
         //testStaticProxy();
@@ -37,7 +35,7 @@ public class TestProxy {
     }
 
     //測試動態代理
-    public static void testCglibProxy(){
+    private static void testCglibProxy(){
         //目标对象
         UserDao target = new UserDao();
 
