@@ -1,5 +1,4 @@
 #### Algorithms-and-DataStructures 
 
-##### This java simple project contains many data structures, algorithms and design patterns.
-
-##### No need for any setting, can directly use them.
+> This java based simple project contains many data structures, algorithms and design patterns.
+  No need for any extra settings, you can directly use them.
