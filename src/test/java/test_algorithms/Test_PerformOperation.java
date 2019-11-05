@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import design_pattern.PerformOperation;
-
 public class Test_PerformOperation extends PerformOperation{
 
 	@Test
