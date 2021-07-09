@@ -1,4 +1,8 @@
-#### Java Algorithms and Data Structures 
+## Algorithms and Data Structures
+> This java based project contains： 
+> * Interview Questions Patterns
+> * Data Structures
+> * Algorithms 
+> * Design Patterns
 
-> This java based simple project contains many data structures, algorithms and design patterns.
-  No need for any extra settings, you can directly use them.
+#### No need for any extra settings, you can directly use them.
