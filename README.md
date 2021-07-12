@@ -1,8 +1,9 @@
 ## Algorithms and Data Structures
-> This java based project contains： 
+
+> This java based project contains：
 > * Interview Questions Patterns
 > * Data Structures
-> * Algorithms 
+> * Algorithms
 > * Design Patterns
 
 #### No need for any extra settings, you can directly use them.
