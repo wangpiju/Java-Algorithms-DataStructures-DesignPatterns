@@ -138,9 +138,6 @@ public class ArrayList<T> {
     /**
      * Returns the backing array of the list.
      *
-     * For grading purposes only. You shouldn't need to use this method since
-     * you have direct access to the variable.
-     *
      * @return the backing array of the list
      */
     public T[] getBackingArray() {
@@ -151,13 +148,9 @@ public class ArrayList<T> {
     /**
      * Returns the size of the list.
      *
-     * For grading purposes only. You shouldn't need to use this method since
-     * you have direct access to the variable.
-     *
      * @return the size of the list
      */
     public int size() {
-        // DO NOT MODIFY THIS METHOD!
         return size;
     }
 }
