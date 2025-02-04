@@ -1,15 +1,21 @@
 package challenges;
 
 /**
+ * Merge Two Sorted Lists (Easy)
+ * Problem: Merge two sorted linked lists and return it as a new sorted list.
+ * 
+ * Example:
+ * Input: 1->2->4, 1->3->4
+ * Output: 1->1->2->3->4->4
+ * 
  * @author jess
- *     Merge Two Sorted Lists (Easy)
- *     Input: 1->2->4, 1->3->4
- *     Output: 1->1->2->3->4->4
  */
 public class MergeTwoSortedList {
 
+  /**
+   * Definition for singly-linked list node
+   */
   public static class ListNode {
-
     int val;
     ListNode next;
 
@@ -19,24 +25,29 @@ public class MergeTwoSortedList {
 
     @Override
     public String toString() {
-      String result = val + " ";
-      if (next != null) {
-        result += next.toString();
+      StringBuilder result = new StringBuilder();
+      ListNode current = this;
+      while (current != null) {
+        result.append(current.val).append(" ");
+        current = current.next;
       }
-      return result;
+      return result.toString().trim();
     }
   }
 
-  //recursion
+  /**
+   * Merges two sorted lists using recursion
+   * Time Complexity: O(n + m) where n and m are lengths of input lists
+   * Space Complexity: O(n + m) due to recursion stack
+   */
   public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-    if (l1 == null) {
+    // Base cases
+    if (l1 == null)
       return l2;
-    }
-
-    if (l2 == null) {
+    if (l2 == null)
       return l1;
-    }
 
+    // Recursive case: choose smaller value and recurse
     if (l1.val < l2.val) {
       l1.next = mergeTwoLists(l1.next, l2);
       return l1;
@@ -46,54 +57,54 @@ public class MergeTwoSortedList {
     }
   }
 
-  //loop
-  public static ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
-    //fake head
-    ListNode head = new ListNode(0);
-    ListNode p = head;
+  /**
+   * Merges two sorted lists using iteration
+   * Time Complexity: O(n + m) where n and m are lengths of input lists
+   * Space Complexity: O(1) as only constant extra space is used
+   */
+  public static ListNode mergeTwoListsIterative(ListNode l1, ListNode l2) {
+    // Create dummy head to simplify edge cases
+    ListNode dummyHead = new ListNode(0);
+    ListNode current = dummyHead;
 
-    ListNode p1 = l1;
-    ListNode p2 = l2;
-
-    //The key to solve the problem is defining a fake head. Then compare the first elements from each list. Add the smaller one to the merged list.
-    while (p1 != null && p2 != null) {
-      if (p1.val < p2.val) {
-        p.next = p1;
-        p1 = p1.next;
+    // Traverse both lists and add smaller value to result
+    while (l1 != null && l2 != null) {
+      if (l1.val < l2.val) {
+        current.next = l1;
+        l1 = l1.next;
       } else {
-        p.next = p2;
-        p2 = p2.next;
+        current.next = l2;
+        l2 = l2.next;
       }
-
-      p = p.next;
+      current = current.next;
     }
 
-    //when one of them is empty, simply append it to the merged list
-    if (p1 != null) {
-      p.next = p1;
-    }
+    // Append remaining nodes from either list
+    current.next = (l1 != null) ? l1 : l2;
 
-    if (p2 != null) {
-      p.next = p2;
-    }
-
-    return head.next;
+    return dummyHead.next;
   }
 
+  /**
+   * Main method for testing the implementation
+   */
   public static void main(String[] args) {
+    // Create first sorted list: 1->2->4->6
     ListNode a = new ListNode(1);
     a.next = new ListNode(2);
     a.next.next = new ListNode(4);
     a.next.next.next = new ListNode(6);
-    System.out.println("list a: " + a);
+    System.out.println("List 1: " + a);
+
+    // Create second sorted list: 1->3->4->7
     ListNode b = new ListNode(1);
     b.next = new ListNode(3);
     b.next.next = new ListNode(4);
     b.next.next.next = new ListNode(7);
-    System.out.println("list b: " + b);
+    System.out.println("List 2: " + b);
 
-    ListNode result = mergeTwoLists2(b, a);
-
-    System.out.println("result: " + result.toString());
+    // Test iterative merge
+    ListNode result = mergeTwoListsIterative(b, a);
+    System.out.println("Merged List: " + result);
   }
 }

@@ -1,58 +1,92 @@
 package challenges;
 
+/**
+ * Problem: Reverse Vowels of a String
+ * Write a function that takes a string as input and reverses only the vowels of
+ * a string.
+ * Vowels include 'a', 'e', 'i', 'o', 'u' and their uppercase variants.
+ * 
+ * Time Complexity: O(n) where n is the length of the string
+ * Space Complexity: O(n) for creating the char array
+ */
 public class ReverseVowels {
-    static final String vowels = "aeiouAEIOU";
+    // Set of vowels for efficient lookup
+    private static final String VOWELS = "aeiouAEIOU";
 
+    /**
+     * Reverses the vowels in the given string while keeping other characters in
+     * place.
+     * 
+     * @param s input string
+     * @return string with vowels reversed
+     */
     public String reverseVowels(String s) {
-        int first = 0, last = s.length() - 1; // Initialize the two pointers
-        char[] array = s.toCharArray();
-        while (first < last) {
-            while (first < last && vowels.indexOf(array[first]) == -1) {
-                first++; // Skip non-vowel characters from the start
-            }
-            while (first < last && vowels.indexOf(array[last]) == -1) {
-                last--; // Skip non-vowel characters from the end
-            }
-            char temp = array[first]; // Swap the vowels found at first and last
-            array[first] = array[last];
-            array[last] = temp;
-            first++;
-            last--;
+        if (s == null || s.length() <= 1) {
+            return s;
         }
-        return new String(array); // Return the reversed string
+
+        char[] chars = s.toCharArray();
+        int left = 0;
+        int right = chars.length - 1;
+
+        while (left < right) {
+            // Find leftmost vowel
+            while (left < right && !isVowel(chars[left])) {
+                left++;
+            }
+
+            // Find rightmost vowel
+            while (left < right && !isVowel(chars[right])) {
+                right--;
+            }
+
+            // Swap vowels if found
+            if (left < right) {
+                swap(chars, left, right);
+                left++;
+                right--;
+            }
+        }
+
+        return new String(chars);
     }
 
+    /**
+     * Checks if a character is a vowel
+     */
+    private boolean isVowel(char c) {
+        return VOWELS.indexOf(c) != -1;
+    }
+
+    /**
+     * Swaps two characters in an array
+     */
+    private void swap(char[] chars, int i, int j) {
+        char temp = chars[i];
+        chars[i] = chars[j];
+        chars[j] = temp;
+    }
+
+    /**
+     * Test cases for the reverseVowels method
+     */
     public static void main(String[] args) {
         ReverseVowels solution = new ReverseVowels();
 
-        // Test Case 1
-        String s1 = "hello";
-        String expectedOutput1 = "holle";
-        String actualOutput1 = solution.reverseVowels(s1);
-        System.out.println("Test Case 1: " + (expectedOutput1.equals(actualOutput1)));
+        // Test cases with expected outputs
+        testCase(solution, "hello", "holle");
+        testCase(solution, "DesignGUrus", "DusUgnGires");
+        testCase(solution, "AEIOU", "UOIEA");
+        testCase(solution, "aA", "Aa");
+        testCase(solution, "", "");
+    }
 
-        // Test Case 2
-        String s2 = "DesignGUrus";
-        String expectedOutput2 = "DusUgnGires";
-        String actualOutput2 = solution.reverseVowels(s2);
-        System.out.println("Test Case 2: " + (expectedOutput2.equals(actualOutput2)));
-
-        // Test Case 3
-        String s3 = "AEIOU";
-        String expectedOutput3 = "UOIEA";
-        String actualOutput3 = solution.reverseVowels(s3);
-        System.out.println("Test Case 3: " + (expectedOutput3.equals(actualOutput3)));
-
-        // Test Case 4
-        String s4 = "aA";
-        String expectedOutput4 = "Aa";
-        String actualOutput4 = solution.reverseVowels(s4);
-        System.out.println("Test Case 4: " + (expectedOutput4.equals(actualOutput4)));
-
-        // Test Case 5
-        String s5 = "";
-        String expectedOutput5 = "";
-        String actualOutput5 = solution.reverseVowels(s5);
-        System.out.println("Test Case 5: " + (expectedOutput5.equals(actualOutput5)));
+    /**
+     * Helper method to run and print test cases
+     */
+    private static void testCase(ReverseVowels solution, String input, String expected) {
+        String actual = solution.reverseVowels(input);
+        System.out.printf("Input: %-12s | Expected: %-12s | Actual: %-12s | Pass: %b%n",
+                input, expected, actual, expected.equals(actual));
     }
 }

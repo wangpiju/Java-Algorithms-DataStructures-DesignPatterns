@@ -3,3 +3,4 @@ target
 .idea
 .vscode
 Algorithms-DataStructures-DesignPatterns.iml
+.DS_Store

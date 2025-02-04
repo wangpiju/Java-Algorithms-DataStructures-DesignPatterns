@@ -3,39 +3,44 @@ package algorithms;
 import java.util.Arrays;
 
 /**
- * 泡沫排序是一種簡單的排序算法，工作原理是重複地遍歷要排序的列表，比較每對相鄰的項目，
- * 若它們的順序錯誤就交換之。遍歷列表的工作重複進行直到沒有元素需要交換，也就是該列表已排序完成。
- * 這個算法的名字由來是因為越小的元素會逐漸“浮”到他們應在的位置。
+ * Bubble Sort is a simple sorting algorithm that repeatedly steps through the
+ * list,
+ * compares adjacent elements and swaps them if they are in the wrong order.
+ * The pass through the list is repeated until no more swaps are needed, which
+ * means
+ * the list is sorted. The algorithm gets its name because smaller elements
+ * "bubble up"
+ * to their correct positions.
  */
 public class BubbleSort {
   public static int[] bubbleSort(int[] arr) {
     int n = arr.length;
-    for (int i = 0; i < n-1; i++) {
-      for (int j = 0; j < n-i-1; j++) {
-        if (arr[j] > arr[j+1]) {
-          // 交換 arr[j] 和 arr[j+1]
+    for (int i = 0; i < n - 1; i++) {
+      for (int j = 0; j < n - i - 1; j++) {
+        if (arr[j] > arr[j + 1]) {
+          // Swap arr[j] and arr[j+1]
           int temp = arr[j];
-          arr[j] = arr[j+1];
-          arr[j+1] = temp;
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
         }
       }
     }
     return arr;
   }
 
-  public static void main(String[] args){
-    int[] a = {3,5,1,2,7,3,2,8,9};
+  public static void main(String[] args) {
+    int[] a = { 3, 5, 1, 2, 7, 3, 2, 8, 9 };
     System.out.println(Arrays.toString(bubbleSort(a)));
   }
 
   /**
-   * 泡沫排序(Bubble Sort)
+   * Bubble Sort Analysis
    *
-   * 時間複雜度：
-   * 最壞情況下（當輸入的數據是反排序的），泡沫排序的時間複雜度是 O(n^2)，其中 n 是輸入的數據量。
-   * 最好情況下（當輸入的數據已經完全排序），泡沫排序的時間複雜度是 O(n)。
-   * 平均情況下，泡沫排序的時間複雜度是 O(n^2)。
-   * 空間複雜度：泡沫排序是在原數據上進行排序，不需要額外的儲存空間，所以其空間複雜度是 O(1)。
+   * Time Complexity:
+   * Worst Case: O(n^2) - when the input array is reverse sorted
+   * Best Case: O(n) - when the input array is already sorted
+   * Average Case: O(n^2)
+   * 
+   * Space Complexity: O(1) - sorting is done in-place, no extra storage is needed
    */
-
 }
