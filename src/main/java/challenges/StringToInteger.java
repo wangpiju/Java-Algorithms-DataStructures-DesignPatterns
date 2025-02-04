@@ -1,66 +1,96 @@
 package challenges;
 
+/**
+ * String to Integer (atoi) Implementation
+ * Converts a string to a 32-bit signed integer following these rules:
+ * 1. Ignore leading whitespace
+ * 2. Check for optional sign (+ or -)
+ * 3. Read digits until non-digit character or end of string
+ * 4. Handle overflow/underflow cases
+ * 
+ * Time Complexity: O(n) where n is the length of the string
+ * Space Complexity: O(1) as we only use constant extra space
+ */
 public class StringToInteger {
+
+    /**
+     * Converts string to integer (atoi implementation)
+     * 
+     * @param s input string to convert
+     * @return converted integer value
+     */
     public static int myAtoi(String s) {
-
-        // To store the final integer result
-        int result = 0;
-
-        // To store the sign which would determine whether the result should be positive (1) or negative (-1)
-        int sign = 1;
-
-        // Index for iterating through the string
-        int i = 0;
-
-        // Ignore any leading whitespaces
-        while (i < s.length() && s.charAt(i) == ' ') {
-            i++;
+        if (s == null || s.isEmpty()) {
+            return 0;
         }
 
-        // Check for sign
-        if (i < s.length() && (s.charAt(i) == '-' || s.charAt(i) == '+')) {
+        int index = 0;
+        int result = 0;
+        int sign = 1;
+        int len = s.length();
 
-            // Set sign to negative if a minus sign is found
-            if (s.charAt(i) == '-') {
-                sign = -1;
+        // Skip leading whitespace
+        while (index < len && s.charAt(index) == ' ') {
+            index++;
+        }
+
+        // Check if we've reached the end after removing whitespace
+        if (index == len) {
+            return 0;
+        }
+
+        // Handle sign
+        if (s.charAt(index) == '+' || s.charAt(index) == '-') {
+            sign = (s.charAt(index) == '+') ? 1 : -1;
+            index++;
+        }
+
+        // Process digits
+        while (index < len) {
+            char currentChar = s.charAt(index);
+
+            // Break if non-digit character is found
+            if (!Character.isDigit(currentChar)) {
+                break;
             }
 
-            // Then, move to the next character
-            i++;
-        }
-
-        // Read the digits
-        while (i < s.length() && (s.charAt(i) >= '0' && s.charAt(i) <= '9')) {
-
-            // Convert the current character to an integer
-            int digit = s.charAt(i) - '0';
+            // Convert character to digit
+            int digit = currentChar - '0';
 
             // Check for overflow
-            if (result > (Integer.MAX_VALUE - digit) / 10) {
-
-                // If there's an overflow, return the maximum or minimum 32-bit integer value
+            if (result > Integer.MAX_VALUE / 10 ||
+                    (result == Integer.MAX_VALUE / 10 && digit > Integer.MAX_VALUE % 10)) {
                 return sign == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE;
             }
 
-            // Update the result by multiplying it by 10 and adding the current digit
+            // Update result
             result = result * 10 + digit;
-
-            // Move to the next character
-            i++;
+            index++;
         }
 
-        // Return the final result, adjusted for the sign
         return sign * result;
     }
 
-    //Driver code
+    /**
+     * Test cases for the myAtoi implementation
+     */
     public static void main(String[] args) {
-        String[] inputStrings = {"25", "   -25", "999 with words", "words and 567", "-91283472332", "91283472332"};
+        String[] testCases = {
+                "42", // Basic positive number
+                "   -42", // Number with whitespace and negative sign
+                "4193 with words", // Number with trailing words
+                "words and 987", // Words before number
+                "-91283472332", // Overflow case
+                "91283472332", // Overflow case
+                "  ", // Only whitespace
+                "+1", // Explicit positive sign
+                "+-12", // Invalid sign sequence
+                "" // Empty string
+        };
 
-        for (int i = 0; i < inputStrings.length; i++) {
-            System.out.println((i + 1) + ".\tInput string     : \"" + inputStrings[i] + "\"");
-            int stoi = myAtoi(inputStrings[i]);
-            System.out.println("\tConverted integer: " + stoi);
+        for (String test : testCases) {
+            System.out.printf("Input: \"%-20s\" | Output: %d%n",
+                    test, myAtoi(test));
         }
     }
 }
